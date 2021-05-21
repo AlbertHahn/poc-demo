@@ -102,7 +102,7 @@ jobs:
           git config user.email github-actions@github.com
           git add .
           git commit -m "bump node-red to ${{ env.RELEASE_VERSION }}"
-          git push origin main
+          git push
       - uses: ifaxity/wait-on-action@v1
         name: wait for helm release
         with:
