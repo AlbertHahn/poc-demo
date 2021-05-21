@@ -89,7 +89,7 @@ jobs:
         run: |
           export PATH=${PATH}:`go env GOPATH`/bin
           go get github.com/davidrjonas/semver-cli
-          git clone https://github.com/AlbertHahn/poc-demo-charts.git
+          git clone git@github.com:AlbertHahn/poc-demo-charts.git
           cd poc-demo-charts
           sed -i "s/appVersion:.*/appVersion: ${{ env.RELEASE_VERSION }}/g" charts/node-red/Chart.yaml
           current_chart_version=$(cat charts/node-red/Chart.yaml | grep "^version: .*" | grep -o "[0-9.]\+")
@@ -98,8 +98,8 @@ jobs:
           echo "Current chart version: $current_chart_version"
           echo "Next chart version: $next_chart_version"
           sed -i "s/version:.*/version: $next_chart_version/g" charts/node-red/Chart.yaml
-          git config --global user.email "albert.post@mailbox.org"
-          git config --global user.name "AlbertHahn"
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git add .
           git commit -m "bump node-red to ${{ env.RELEASE_VERSION }}"
           git push origin main
